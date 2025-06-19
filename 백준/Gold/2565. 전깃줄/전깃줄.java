@@ -8,9 +8,6 @@ public class Main {
         
         int N = Integer.parseInt(br.readLine());
 
-        int[] A = new int[N];
-        int[] B = new int[N];
-
         int[][] wires = new int[N][2];
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
