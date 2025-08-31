@@ -1,16 +1,18 @@
 import sys
+from collections import Counter
 
-word = list(sys.stdin.readline().strip().upper())
+word = sys.stdin.readline().strip().upper()
 
-alpa = [0] * 26
+count_dict = Counter(word)
 
-for items in word:
-    alpa[ord(items) - ord('A')] += 1
-
-max_value = max(alpa)
-find_most_used_alpa = alpa.count(max_value)
-
-if find_most_used_alpa >= 2:
+if not count_dict:
     print('?')
 else:
-    print(chr(alpa.index(max_value) + ord('A')))
+    max_value = max(count_dict.values())
+
+    most_common_letters = [k for k, v in count_dict.items() if v == max_value]
+
+    if len(most_common_letters) > 1:
+        print('?')
+    else:
+        print(most_common_letters[0])
