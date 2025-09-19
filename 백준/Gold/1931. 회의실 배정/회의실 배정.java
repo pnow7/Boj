@@ -1,50 +1,39 @@
 import java.io.*;
 import java.util.*;
 
-class Meeting {
-    int start;
-    int end;
-    
-    public Meeting(int start, int end) {
-        this.start = start;
-        this.end = end;
-    }
-}
-
 public class Main {
     
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        List<Meeting> meetings = new ArrayList<>();
         
         int N = Integer.parseInt(br.readLine());
         
+        int[][] meetings = new int[N][2];
+        
         for (int i = 0; i < N; i++) {
             StringTokenizer st = new StringTokenizer(br.readLine());
-            int start = Integer.parseInt(st.nextToken());
-            int end = Integer.parseInt(st.nextToken());
-            meetings.add(new Meeting(start, end));
+            meetings[i][0] = Integer.parseInt(st.nextToken());
+            meetings[i][1] = Integer.parseInt(st.nextToken());
         }
         
-        Collections.sort(meetings, (a, b) -> {
-            if (a.end == b.end) {
-                return Integer.compare(a.start, b.start);
+        Arrays.sort(meetings, (a, b) -> {
+            if (a[1] == b[1]) {
+                return Integer.compare(a[0], b[0]);
             }
-            
-            return Integer.compare(a.end, b.end);
+            return Integer.compare(a[1], b[1]);
         });
         
         int count = 0;
-        int lastEndTime = 0;     
-             
-        for (Meeting m : meetings) {
-            if (m.start >= lastEndTime) {
+        int lastEndTime = 0;
+        
+        for (int i = 0; i < N; i++) {
+            if (meetings[i][0] >= lastEndTime) {
                 count++;
-                lastEndTime = m.end;
+                lastEndTime = meetings[i][1];
             }
         }
         
         System.out.println(count);
-        br.close();     
+        br.close();
     }
 }
