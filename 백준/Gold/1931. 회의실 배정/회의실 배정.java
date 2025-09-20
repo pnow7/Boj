@@ -20,6 +20,7 @@ public class Main {
             if (a[1] == b[1]) {
                 return Integer.compare(a[0], b[0]);
             }
+            
             return Integer.compare(a[1], b[1]);
         });
         
@@ -36,4 +37,5 @@ public class Main {
         System.out.println(count);
         br.close();
     }
+    
 }
