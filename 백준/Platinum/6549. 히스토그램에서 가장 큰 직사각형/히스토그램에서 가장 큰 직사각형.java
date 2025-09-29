@@ -8,37 +8,35 @@ public class Main {
         StringBuilder sb = new StringBuilder();
         
         while (true) {
-            StringTokenizer st = new StringTokenizer(br.readLine());
+            StringTokenizer st = new StringTokenizer(br.readLine()); 
             int n = Integer.parseInt(st.nextToken());
             
             if (n == 0) break;
             
-            int[] heights = new int[n];
+            int[] arr = new int[n];
             for (int i = 0; i < n; i++) {
-                heights[i] = Integer.parseInt(st.nextToken());
+                arr[i] = Integer.parseInt(st.nextToken());
             }
             
-            sb.append(findMaxArea(heights, 0, n - 1)).append("\n");
+            sb.append(findMaxArea(arr, 0, n - 1)).append("\n");
         }
         
-        System.out.print(sb);
+        System.out.println(sb);
         br.close();
     }
     
     static long findMaxArea(int[] heights, int start, int end) {
-        if (start == end) {
-            return (long) heights[start];
-        }
+        if (start == end) return (long) heights[start];
         
         int mid = (start + end) / 2;
         int left = mid;
         int right = mid + 1;
         
-        long centerArea = 0;
         long leftArea = findMaxArea(heights, start, mid);
         long rightArea = findMaxArea(heights, mid + 1, end);
         long h = Math.min(heights[left], heights[right]);
         
+        long centerArea = 0;
         centerArea = Math.max(leftArea, rightArea);
         centerArea = Math.max(centerArea, h * 2);
         
@@ -54,7 +52,7 @@ public class Main {
             centerArea = Math.max(centerArea, h * (right - left + 1));
         }
         
-        return Math.max(Math.max(leftArea, rightArea), centerArea);
+        return Math.max(centerArea, Math.max(leftArea, rightArea));
     }
     
 }
