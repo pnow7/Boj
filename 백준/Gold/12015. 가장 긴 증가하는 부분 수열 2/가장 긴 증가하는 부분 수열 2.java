@@ -14,14 +14,14 @@ public class Main {
         LISList.add(Integer.parseInt(st.nextToken()));
         
         for (int i = 1; i < N; i++) {
-            int val = Integer.parseInt(st.nextToken());
-            int lastVal = LISList.get(LISList.size() - 1);
+            int value = Integer.parseInt(st.nextToken());
+            int lastValue = LISList.get(LISList.size() - 1);
             
-            if (val > lastVal) {
-                LISList.add(val);
+            if (value > lastValue) {
+                LISList.add(value);
             } else {
-                int idx = lowerBound(LISList, val);
-                LISList.set(idx, val);
+                int index = binarySearch(LISList, value);
+                LISList.set(index, value);
             }
         }
         
@@ -29,7 +29,7 @@ public class Main {
         br.close();
     }
     
-    static int lowerBound(List<Integer> list, int target) {
+    static int binarySearch(List<Integer> list, int target) {
         int lo = 0;
         int hi = list.size();
         
@@ -45,5 +45,4 @@ public class Main {
         
         return lo;
     }
-    
 }
